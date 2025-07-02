@@ -148,4 +148,4 @@ MIT License © 2025 Mengfan Long
 
 ---
 
-## ⭐ Star this repo if you like it!
+
