@@ -1,24 +1,24 @@
 #!/bin/bash
 
 set -e
-echo "📦 Setting up Quant Trading System..."
+echo "📦 Setting up Risk-Aware Trading System..."
 
-# 1. 创建 Python 虚拟环境（仅当 venv 不存在时）
+# 1. Create Python virtual environment (if it does not exist)
 if [ ! -d "venv" ]; then
     echo "🧪 Creating virtual environment..."
     python3.10 -m venv venv
 fi
 
-# 2. 激活环境
+# 2. Activate environment
 echo "🔁 Activating environment..."
 source venv/bin/activate
 
-# 3. 安装 Python 依赖
+# 3. Install Python dependencies
 echo "📦 Installing Python dependencies..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-# 4. 构建 C++ 模块
+# 4. Build C++ PyBind11 module
 echo "🔧 Building C++ PyBind11 module..."
 mkdir -p cpp_core/build
 cd cpp_core/build
@@ -26,8 +26,9 @@ cmake ..
 make
 cd ../../
 
-# 5. 测试 C++ 模块能否被正确加载
+# 5. Test if C++ module can be loaded
 echo "🧪 Testing cpp_trading module..."
-python scripts/test_cpp_module.py
+python scripts/test_order_executor.py
 
-echo "✅ Setup complete. You can now run train_dqn.py or train_ppo.py!"
+echo "✅ Setup complete. You can now run risk control or strategy scripts!"
+
