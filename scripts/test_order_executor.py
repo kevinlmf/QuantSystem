@@ -1,28 +1,61 @@
+# scripts/test_order_executor.py
 import sys
-import os
+import platform
+from pathlib import Path
+import pytest
 
-# 添加 .so 路径（确保它指向 cpp_trading.so 所在的 build 目录）
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../cpp_core/build")))
+# ========== 路径 & 动态库检测 ==========
+project_root = Path(__file__).resolve().parents[1]
+build_dir = project_root / "cpp_core" / "build"
 
-from cpp_trading import Order, OrderExecutor, OrderType
+if platform.system() == "Windows":
+    lib_ext = ".pyd"
+else:  # macOS / Linux
+    lib_ext = ".so"
 
-# 初始化执行器
-executor = OrderExecutor()
+# 搜索动态库
+found_lib = None
+for file in build_dir.rglob(f"*{lib_ext}"):
+    found_lib = file
+    break
 
-# 创建一个订单
-order = Order()
-order.symbol = "AAPL"
-order.type = OrderType.BUY
-order.price = 180.5
-order.quantity = 10
-order.timestamp = 1680000000
+if not found_lib:
+    pytest.skip(f"未找到动态库文件（{lib_ext}），跳过 OrderExecutor 测试", allow_module_level=True)
 
-# 提交并模拟执行
-executor.submit_order(order)
-executor.simulate_execution()
+# 把动态库目录加到 sys.path
+sys.path.insert(0, str(found_lib.parent))
 
-# 打印结果
-print("✅ Filled orders:")
-for filled in executor.get_filled_orders():
-    side = "BUY" if filled.type == OrderType.BUY else "SELL"
-    print(f"{side} {filled.quantity} {filled.symbol} @ ${filled.price}")
+# ========== 导入 C++ 模块 ==========
+try:
+    from cpp_trading import Order, OrderExecutor, OrderType
+except ImportError:
+    from cpp_trading2 import Order, OrderExecutor, OrderType
+
+# ========== 测试用例 ==========
+def test_order_executor_basic_flow():
+    """测试下单与执行流程"""
+    executor = OrderExecutor()
+
+    # 创建订单
+    order = Order()
+    order.symbol = "AAPL"
+    order.type = OrderType.BUY
+    order.price = 180.5
+    order.quantity = 10
+    order.timestamp = 1680000000
+
+    # 提交订单
+    executor.submit_order(order)
+
+    # 模拟执行
+    executor.simulate_execution()
+
+    # 检查是否有成交订单
+    filled_orders = executor.get_filled_orders()
+    assert len(filled_orders) > 0, "执行后应有成交订单"
+
+    first_filled = filled_orders[0]
+    assert first_filled.symbol == "AAPL"
+    assert first_filled.type == OrderType.BUY
+    assert first_filled.quantity == 10
+    assert abs(first_filled.price - 180.5) < 1e-6

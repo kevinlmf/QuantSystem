@@ -1,6 +1,7 @@
 venv/
 __pycache__/
-*.so
-cpp_core/build/
-tensorboard/
-models/
+*.pyc
+data/*
+!data/README.md
+build/
+dist/

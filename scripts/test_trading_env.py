@@ -1,33 +1,47 @@
-import os
+# scripts/test_trading_env.py
 import sys
+import os
+from pathlib import Path
+import pytest
 import numpy as np
 
-# Add env/ and data/ directories to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../env")))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../data")))
+# ========== 路径设置 ==========
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "env"))
+sys.path.insert(0, str(ROOT / "data"))
 
 from trading_env import TradingEnv
 from data_loader import load_csv_data
 
-# Load market data
-data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data/SPY_1d.csv"))
-data = load_csv_data(data_path)
+# ========== 数据准备 ==========
+DATA_PATH = ROOT / "data" / "SPY_1d.csv"
+if not DATA_PATH.exists():
+    pytest.skip(f"缺少测试数据文件：{DATA_PATH}", allow_module_level=True)
 
-# Initialize environment
-env = TradingEnv(data, window_size=10, initial_balance=1000)
+data = load_csv_data(str(DATA_PATH))
 
-# Reset environment
-obs, info = env.reset()
-print("✅ Initial Observation:")
-print(obs)
+# ========== 测试用例 ==========
+def test_env_reset_and_initial_obs():
+    env = TradingEnv(data, window_size=10, initial_balance=1000)
+    obs, info = env.reset()
+    assert isinstance(obs, (np.ndarray, list)), "reset 应返回 ndarray/list"
+    assert env.balance == 1000, "初始资金应为 1000"
+    assert "step" in info, "info 应包含 step 字段"
 
-# Simulate a few steps
-actions = [1, 0, 2, 1, 2]  # Example sequence: Buy → Hold → Sell → Buy → Sell
-print("\n🏃‍♂️ Simulating environment steps:")
-for step, action in enumerate(actions):
-    obs, reward, done, truncated, info = env.step(action)
-    print(f"Step {step + 1}: Action={action}, Reward={reward:.2f}, Balance={env.balance:.2f}, Done={done}")
+def test_env_step_flow():
+    env = TradingEnv(data, window_size=10, initial_balance=1000)
+    env.reset()
 
-    if done:
-        print("💥 Episode finished.")
-        break
+    actions = [1, 0, 2, 1, 2]  # Buy → Hold → Sell → Buy → Sell
+    for action in actions:
+        obs, reward, done, truncated, info = env.step(action)
+        # 基础检查
+        assert isinstance(obs, (np.ndarray, list))
+        assert isinstance(reward, (int, float))
+        assert isinstance(done, bool)
+        assert isinstance(truncated, bool)
+        assert isinstance(info, dict)
+        # 资金要合理
+        assert env.balance >= 0
+        if done:
+            break
