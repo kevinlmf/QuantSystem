@@ -220,6 +220,17 @@ Risk Profile (Momentum):
 
 > 📌 This makes it easy to compare strategies side-by-side and analyze trade-offs between risk and return.
 
+---
+
+## 🔮 Future Expansion
+
+- 📈 **More Strategies**: Add factor-based, regime-switching, and deep learning-driven models  
+- 🧮 **Risk Modeling**: Integrate copula-based tail risk control and stress testing  
+- 🤖 **Reinforcement Learning**: Extend to multi-agent RL and market simulation environments  
+- ⚡ **Performance Scaling**: GPU acceleration for high-frequency trading experiments  
+- ☁️ **Deployment**: Cloud-based simulation and API for live trading connections  
+
+---
 
 
 ## 📜 License
