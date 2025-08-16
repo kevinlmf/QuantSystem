@@ -173,15 +173,54 @@ python scripts/strategy_comparison.py   # run the strategy comparison demo
 ```
 
 ---
+---
 
-## 🧱 Conventions & Tips
+## 🎯 Use Cases
 
-- Keep large data outside the repo; include tiny samples only (`data/README.md` explains how to fetch full data).  
-- Prefer `--force-with-lease` when rewriting history; protect `main` branch in GitHub settings.  
-- Use `.gitignore` to exclude `venv/`, caches, compiled artifacts, and large data.  
-- For speed‑critical loops, prefer C++ modules (PyBind11) or vectorize with NumPy.
+This system is designed for **research, prototyping, and education**:
+
+- 📚 **Learning & Teaching**: Demonstrates portfolio theory, risk control, backtesting  
+- 🧪 **Research Prototyping**: Test new trading signals, reinforcement learning agents, or execution models  
+- 🏦 **Risk Management**: Evaluate CVaR, drawdowns, and stress tests on strategies  
+- 🚀 **Practical Experiments**: Try momentum, pairs, or mean-variance in a realistic sim with costs & slippage  
+- 🤖 **Machine Learning Integration**: Plug into Stable-Baselines3 (PPO, SAC, DQN) for RL trading research  
 
 ---
+
+---
+
+## 📑 Example Performance Report
+
+When running `python scripts/strategy_comparison.py`, you will get outputs like:
+
+```
+================================================================================
+           Strategy Comparison Report
+================================================================================
+Simulation Period: 60 trading days
+
+Strategies:
+- Momentum: Multi-factor trend signals (MACD, RSI, returns)
+- Pairs Trading: Statistical arbitrage on cointegrated assets
+- Mean-Variance: Modern Portfolio Theory optimization
+- Equal Weight Benchmark: Buy & hold baseline
+
+Key Metrics:
+  Strategy         Ann. Return   Volatility   Sharpe   Max Drawdown   Win Rate
+  Momentum           210.5%        8.4%       25.4       -0.3%        69.6%
+  Mean-Variance      122.0%       12.4%        9.7       -2.8%        65.2%
+  Equal-Weight       1000%        50.1%       19.9       -7.9%        60.8%
+
+Risk Profile (Momentum):
+- VaR (95%): -0.0018
+- Max Daily Loss: -0.0031
+- Max Daily Gain: 0.0256
+================================================================================
+```
+
+> 📌 This makes it easy to compare strategies side-by-side and analyze trade-offs between risk and return.
+
+
 
 ## 📜 License
 
