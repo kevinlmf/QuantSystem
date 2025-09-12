@@ -1,6 +1,6 @@
 # Quantitative Trading System
 
-##Summary
+# Summary
 
 This project demonstrates my ability to design and implement a
 **full-stack quantitative trading system** with strong emphasis on both
