@@ -124,7 +124,7 @@ class TradingEnv(gym.Env):
         start = self.current_step - self.window_size
         end = self.current_step
         window = self.df.iloc[start:end].to_numpy(dtype=np.float32, copy=False)
-        # 某些数据源可能不足 window_size，做个保护（极少见）
+        # 某些data源可能不足 window_size，做个保护（极少见）
         if window.shape != (self.window_size, self.num_features):
             pad_rows = self.window_size - window.shape[0]
             if pad_rows > 0:

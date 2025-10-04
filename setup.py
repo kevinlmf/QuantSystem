@@ -1,9 +1,9 @@
-# setup.py  —— for building top-level module: cpp_trading2
+# setup.py - Build configuration for top-level module: cpp_trading2
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 import sys, os, glob
 
-# 尝试获取 pybind11 的包含目录
+# Try to get pybind11 include directories
 def get_pybind_includes():
     try:
         import pybind11
@@ -11,7 +11,7 @@ def get_pybind_includes():
     except Exception:
         return []
 
-# 源文件（按你的树）
+# Source files
 sources = [
     "cpp_core/bindings/all_bindings.cpp",
     *glob.glob("cpp_core/src/*.cpp"),  # data_feed.cpp, order.cpp, order_executor.cpp
@@ -19,13 +19,13 @@ sources = [
 
 include_dirs = [
     "cpp_core/include",
-    "cpp_core",  # 以防头文件用相对包含
+    "cpp_core",  # In case headers use relative includes
     *get_pybind_includes(),
 ]
 
 extra_compile_args = ["-std=c++17", "-O3"]
 if sys.platform == "darwin":
-    # macOS 上针对 ARM/Intel 都OK；如需最低系统版本可加:
+    # macOS supports both ARM/Intel; can add minimum version if needed:
     # extra_compile_args += ["-mmacosx-version-min=11.0"]
     pass
 elif sys.platform.startswith("linux"):
@@ -36,7 +36,7 @@ elif os.name == "nt":
 
 ext_modules = [
     Extension(
-        name="cpp_trading2",              # 顶层模块名：cpp_trading2
+        name="cpp_trading2",              # Top-level module name: cpp_trading2
         sources=sources,
         include_dirs=include_dirs,
         language="c++",

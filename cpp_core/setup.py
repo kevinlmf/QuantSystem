@@ -5,7 +5,7 @@ ext_modules = [
     Pybind11Extension(
         "cpp_trading2",  # 和setup中的name保持一致
         [
-            "bindings/all_bindings.cpp",   # ✅ 合并绑定
+            "bindings/all_bindings.cpp",   # ✅ Merge绑定
             "src/data_feed.cpp",
             "src/order.cpp",
             "src/order_executor.cpp"

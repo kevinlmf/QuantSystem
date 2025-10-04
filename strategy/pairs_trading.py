@@ -28,7 +28,7 @@ class PairsTradingStrategy:
 
     # --------- public APIs used by strategy_comparison.py ----------
     def find_pairs(self, price_data: Dict[str, pd.DataFrame]) -> List[Tuple[str, str]]:
-        """返回满足最低相关性的可用配对列表"""
+        """return满足最低相关性的Available配对列表"""
         syms = list(price_data.keys())
         pairs = []
         for i in range(len(syms)):
@@ -44,7 +44,7 @@ class PairsTradingStrategy:
         return pairs
 
     def update_pair_statistics(self, price_data: Dict[str, pd.DataFrame]) -> Dict[str, PairState]:
-        """计算所有配对的 zscore / 均值 / 标准差 / 相关性，返回字典"""
+        """calculate所有配对的 zscore / 均值 / 标准差 / 相关性，return字典"""
         states: Dict[str, PairState] = {}
         pairs = self.find_pairs(price_data)
         for s1, s2 in pairs:
@@ -56,7 +56,7 @@ class PairsTradingStrategy:
             p2w = p2.tail(self.lookback_period)
             if len(p1w) < 10 or len(p2w) < 10:
                 continue
-            # 简单价差（或可改为对冲比率）
+            # Simple价差（或可改为对冲Ratio）
             spread = p1w - p2w
             mu, sd = float(spread.mean()), float(spread.std(ddof=1))
             z = float((spread.iloc[-1] - mu) / sd) if sd > 0 else 0.0
@@ -65,7 +65,7 @@ class PairsTradingStrategy:
         return states
 
     def generate_signals(self, pair_states: List[PairState] | Dict[str, PairState], current_prices: Dict[str, float]):
-        """基于 zscore 生成信号：|z| >= z_entry 进场，|z| <= z_exit 出场"""
+        """基于 zscore Generate信号：|z| >= z_entry 进场，|z| <= z_exit 出场"""
         if isinstance(pair_states, dict):
             states = list(pair_states.values())
         else:
@@ -76,8 +76,8 @@ class PairsTradingStrategy:
                 continue
             z = st.zscore
             s1, s2 = st.symbols
-            # z > 0: s1 相对 s2 偏高 -> 做空 s1 / 做多 s2
-            # z < 0: s1 相对 s2 偏低 -> 做多 s1 / 做空 s2
+            # z > 0: s1 相对 s2 偏高 -> Short s1 / Long s2
+            # z < 0: s1 相对 s2 偏低 -> Long s1 / Short s2
             if abs(z) >= self.z_entry:
                 signals.append({"pair": (s1, s2), "z": z, "action": "enter"})
             elif abs(z) <= self.z_exit:
@@ -85,25 +85,25 @@ class PairsTradingStrategy:
         return signals
 
     def execute_pair_trade(self, signal, portfolio_value: float) -> Dict[str, float]:
-        """把配对信号转成头寸权重（简单等权，单对不超过 10% 名义敞口）"""
+        """把配对信号转成头寸Weight（Simple等权，单对不超过 10% 名义敞口）"""
         s1, s2 = signal["pair"]
         z = float(signal["z"])
         max_expo = 0.1  # 每对最多 10%
         if signal["action"] == "enter":
-            # 按 z 方向对冲：权重总额不超过 max_expo
+            # 按 z 方向对冲：Weight总额不超过 max_expo
             w = max_expo / 2.0
             if z > 0:
-                # 做空 s1，做多 s2
+                # Short s1，Long s2
                 return {s1: -w, s2: +w}
             else:
-                # 做多 s1，做空 s2
+                # Long s1，Short s2
                 return {s1: +w, s2: -w}
         else:
-            return {}  # exit -> 平仓
+            return {}  # exit -> Close
 
     # ----------------- internal helpers -----------------
     def _align_price_series(self, df1: pd.DataFrame, df2: pd.DataFrame):
-        """对齐两个 DataFrame，返回 close 的对齐 Series（长度不足返回 None, None）"""
+        """Align两个 DataFrame，return close 的Align Series（长度不足return None, None）"""
         def get_close(df: pd.DataFrame) -> pd.Series:
             if "close" in df.columns:
                 return pd.Series(df["close"], dtype=float)
