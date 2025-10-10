@@ -153,4 +153,4 @@ This is a complex high-frequency trading system with many moving parts (C++ bind
 
 ---
 
-Code a lot, Worry less 😄
+Stay curious, Stay happy ✨
