@@ -4,8 +4,20 @@ High-Throughput Data Processing Benchmark
 """
 import sys
 import os
-# Add parent directory to path for cpp_trading2 import
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 获取当前文件所在目录 (benchmarks/)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 获取项目根目录 (QuantSystem/)
+parent_dir = os.path.dirname(current_dir)
+
+# 拼接出 cpp_core 的绝对路径并加入 sys.path
+cpp_dir = os.path.join(parent_dir, "cpp_core")
+sys.path.insert(0, cpp_dir)
+
+# 现在可以导入 cpp_trading2 模块
+import cpp_trading2
+
 
 import time
 import numpy as np
