@@ -16,8 +16,8 @@ High-performance high-frequency trading system combining ultra-low-latency C++ e
 
 ```bash
 # Clone repository
-git clone https://github.com/kevinlmf/HFT_Trading_System.git
-cd HFT_Trading_System
+git clone https://github.com/kevinlmf/HFT_System.git
+cd HFT_System
 
 # Setup environment
 python3 -m venv venv
