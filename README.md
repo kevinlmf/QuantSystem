@@ -40,8 +40,7 @@ python scripts/strategy_comparison.py    # Traditional strategy comparison
 python scripts/evaluate_strategies.py    # Comprehensive evaluation
 
 # Run benchmarks
-python scripts/benchmark_latency.py      # Python component speed
-./scripts/benchmark_cpp.sh               # C++ core performance
+python benchmarks/benchmark_throughput.py 
 ```
 
 ---
