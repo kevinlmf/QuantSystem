@@ -6,15 +6,46 @@ gymnasium==0.29.1
 numpy>=1.23
 pandas>=1.5
 matplotlib>=3.6
+scipy>=1.9
+seaborn>=0.12
 
 # C++ module
 pybind11>=2.11
 
-# Logging
+# Logging & Monitoring
 tensorboard>=2.10
 
-# Optional
+# Core ML (Required)
 scikit-learn>=1.2
+
+# Data fetching
+yfinance>=0.2.0
+statsmodels>=0.14.0
+
+# ========== Optional ML/DL Dependencies ==========
+# Uncomment the packages you need
+
+# Traditional ML (Gradient Boosting)
+# xgboost>=2.0.0
+# lightgbm>=4.0.0
+
+# Deep Learning (PyTorch)
+# torch>=2.0.0
+# torchvision>=0.15.0
+
+# Alternative: Deep Learning (TensorFlow/Keras)
+# tensorflow>=2.13.0
+
+# Alternative: Deep Learning (JAX/Flax)
+# jax>=0.4.13
+# jaxlib>=0.4.13
+# flax>=0.7.0
+
+# Hyperparameter Optimization
+# optuna>=3.3.0
+
+# Model Interpretation
+# shap>=0.42.0
 
 
 

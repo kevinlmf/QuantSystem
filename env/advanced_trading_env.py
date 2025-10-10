@@ -14,8 +14,15 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
-from data.pipeline import data_pipeline
-from data.database import data_storage
+# NOTE: Optional data infrastructure - fallback to sample data if not available
+try:
+    from data.pipeline import data_pipeline
+    from data.database import data_storage
+    DATA_INFRASTRUCTURE_AVAILABLE = True
+except ImportError:
+    DATA_INFRASTRUCTURE_AVAILABLE = False
+    data_pipeline = None
+    data_storage = None
 
 logger = logging.getLogger(__name__)
 
@@ -141,9 +148,12 @@ class AdvancedTradingEnv(gym.Env):
             data_dict = {}
             for symbol in self.symbols:
                 # 优先从data库Get，If没有则在线Get
-                df = data_pipeline.get_data_with_fallback(
-                    symbol, self.start_date, self.end_date
-                )
+                if DATA_INFRASTRUCTURE_AVAILABLE and data_pipeline is not None:
+                    df = data_pipeline.get_data_with_fallback(
+                        symbol, self.start_date, self.end_date
+                    )
+                else:
+                    df = pd.DataFrame()  # Empty DataFrame will trigger fallback
                 
                 if df.empty:
                     raise ValueError(f"无法Get {symbol} 的data")

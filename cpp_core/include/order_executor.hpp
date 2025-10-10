@@ -44,11 +44,9 @@ struct Fill {
 class OrderExecutor {
 public:
     OrderExecutor(double commission_rate = 0.0001,  // 0.01%
-                 double min_commission = 0.0,
-                 double slippage_bps = 1.0)  // 0.1 bps base slippage
+                 double min_commission = 0.0)
         : commission_rate_(commission_rate),
           min_commission_(min_commission),
-          slippage_bps_(slippage_bps),
           next_order_id_(1) {}
 
     // ========== Submit Order ==========
@@ -168,7 +166,6 @@ private:
 
     double commission_rate_;
     double min_commission_;
-    double slippage_bps_;
     uint64_t next_order_id_;
 
     std::vector<Order> pending_orders_;

@@ -30,7 +30,6 @@ else()
     # pybind11 module (compatibility layer)
     pybind11_add_module(cpp_trading
         src/order.cpp
-        src/order_executor.cpp
         bindings/all_bindings.cpp
     )
 
