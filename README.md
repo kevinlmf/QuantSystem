@@ -22,7 +22,7 @@ Modern quantitative trading requires:
 QuantSystem began as a **High-Frequency Trading (HFT)** system but is evolving into a comprehensive **Quantitative Trading & Financial AI Platform** that encompasses:
 
 - **High-Frequency Trading** (microsecond execution)
-- **Reinforcement Learning** for adaptive strategies
+- **Machine Learning** for adaptive strategies
 - **Portfolio Optimization** (multi-asset allocation)
 - **Options Pricing & Greeks** (derivatives trading)
 - **Copula Models** (dependency modeling)
