@@ -25,7 +25,7 @@ QuantSystem began as a **High-Frequency Trading (HFT)** system but is evolving i
 - **Machine Learning** for adaptive strategies
 - **Portfolio Optimization** (multi-asset allocation)
 - **Options Pricing & Greeks** (derivatives trading)
-- **Copula Models** (dependency modeling)
+- **Extreme-condition risk management** via dependency structure modeling
 - **Factor Analysis** (systematic alpha generation)
 - **AI Agents** (autonomous trading systems)
 
