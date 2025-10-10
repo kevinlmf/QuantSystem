@@ -14,7 +14,7 @@
 
 ```bash
 git clone https://github.com/kevinlmf/Quant_System.git
-cd HFT_Trading_System/Quant_System
+cd Quant_System
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 ```
