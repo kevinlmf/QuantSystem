@@ -50,7 +50,7 @@ QuantSystem began as a **High-Frequency Trading (HFT)** system but is evolving i
 - **Gradient Boosting**: XGBoost, LightGBM for feature-based models
 - **JAX Integration**: Hardware-accelerated numerical computing
 
-### 🔧 **Production-Ready Infrastructure**
+###  **Production-Ready Infrastructure**
 - **Backtesting Engine**: Vectorized historical simulation
 - **Risk Management**: Real-time position limits and drawdown controls
 - **Performance Analytics**: Sharpe ratio, max drawdown, factor attribution
