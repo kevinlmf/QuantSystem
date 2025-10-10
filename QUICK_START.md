@@ -13,8 +13,8 @@
 ### 1️⃣ Clone & Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/HFT_Trading_System.git
-cd HFT_Trading_System/HFT_System
+git clone https://github.com/kevinlmf/Quant_System.git
+cd HFT_Trading_System/Quant_System
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
 ```
