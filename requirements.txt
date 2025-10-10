@@ -37,15 +37,19 @@ statsmodels>=0.14.0
 # tensorflow>=2.13.0
 
 # Alternative: Deep Learning (JAX/Flax)
-# jax>=0.4.13
-# jaxlib>=0.4.13
-# flax>=0.7.0
+jax>=0.4.13
+jaxlib>=0.4.13
+flax>=0.7.0
 
 # Hyperparameter Optimization
 # optuna>=3.3.0
 
 # Model Interpretation
 # shap>=0.42.0
+
+
+
+
 
 
 
