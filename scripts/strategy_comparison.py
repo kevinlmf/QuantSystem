@@ -356,10 +356,10 @@ class StrategyComparison:
         if symbols is None:
             symbols = ["AAPL_TECH", "MSFT_TECH", "JPM_FIN", "XOM_ENERGY", "JNJ_HEALTH", "UTIL_POWER"]
 
-        print("GenerateSimulationdata...")
+        print("Generating simulation data...")
         price_data = self.simulator.generate_sample_data(symbols, days=1000)
 
-        print("RunstrategySimulation...")
+        print("Running strategy simulation...")
         momentum = self.simulator.simulate_momentum_strategy(price_data)
         pairs = self.simulator.simulate_pairs_strategy(price_data)
         mean_var = self.simulator.simulate_mean_variance_strategy(price_data)
@@ -538,7 +538,7 @@ class StrategyComparison:
 # =====================================================================================
 def main():
     """主function"""
-    print("Start金融strategyComparisonAnalysis...")
+    print("Starting Strategy Comparison Analysis...")
 
     comparator = StrategyComparison()
     test_symbols = [

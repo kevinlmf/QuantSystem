@@ -7,8 +7,7 @@ ext_modules = [
         [
             "bindings/all_bindings.cpp",   # ✅ Merge绑定
             "src/data_feed.cpp",
-            "src/order.cpp",
-            "src/order_executor.cpp"
+            "src/order.cpp"
         ],
         include_dirs=["include"],
     ),
