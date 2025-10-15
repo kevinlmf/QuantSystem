@@ -69,9 +69,9 @@ HFT_Trading_System/
 
 ---
 
-## ⚙️ Quick Start
+##  Quick Start
 
-### 1️⃣ Setup Environment
+### Setup Environment
 ```bash
 git clone https://github.com/kevinlmf/HFT_Trading_System
 cd HFT_Trading_System
@@ -80,14 +80,14 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Build C++ Core
+###  Build C++ Core
 ```bash
 ./build_cpp.sh  # Linux/macOS
 # or
 python cpp_core/setup.py build_ext --inplace  # Windows
 ```
 
-### 3️⃣ Verify Installation
+### 3️ Verify Installation
 ```bash
 python test_build.py
 # ✓ All tests passed!
@@ -95,7 +95,7 @@ python test_build.py
 
 ---
 
-## 🧪 Run Examples
+##  Run Examples
 
 ```bash
 # Compare basic strategies
@@ -150,7 +150,7 @@ Built using:
 ---
 
 <div align="center">
-*Code a lot, Worry less.* 😄  
+Code a lot, Worry less😄  
 
 </div>
 
