@@ -137,7 +137,16 @@ This software is **not intended for live trading** without extensive testing.
 Trading in financial markets involves substantial risk.
 
 ---
+## Future Work
 
+Future development of will focus on two research-driven directions:
+
+1. **Statistical Computing Optimization**  
+   Designing algorithms with **lower space and time complexity**, leveraging numerical linear algebra, memory-efficient data structures, and distributed computing to further reduce computational overhead in ultra-high-frequency settings.
+
+2. **Microstructure-Aware Strategy Adaptation**  
+   Developing **adaptive HFT strategies** that respond to evolving market microstructures — such as order flow imbalance, spread dynamics, and latency arbitrage — using online learning and reinforcement frameworks optimized for ultra-low latency execution.
+---
 ##  Acknowledgments
 
 Built using:
