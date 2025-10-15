@@ -1,256 +1,156 @@
-# QuantSystem: Advanced Quantitative Trading Platform
+#  HFT_Trading_System: High-Frequency Trading & Strategy Research Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![C++17](https://img.shields.io/badge/C++-17-blue.svg)](https://isocpp.org/)
 
-> **A high-performance quantitative trading platform combining ultra-low-latency C++ execution with modern ML/AI-driven strategies.**
-
----
-##  Project Motivation
-
-Modern quantitative trading requires:
-1. **Ultra-low latency** for high-frequency opportunities
-2. **Advanced ML/AI** for pattern recognition and prediction
-3. **Robust risk management** for capital preservation
-4. **Flexible architecture** for rapid strategy iteration
+> **A high-frequency trading (HFT) platform built for ultra-low latency execution and intelligent strategy discovery.**
 
 ---
 
-##  Vision
+## Project Motivation
 
-QuantSystem began as a **High-Frequency Trading (HFT)** system but is evolving into a comprehensive **Quantitative Trading & Financial AI Platform** that encompasses:
 
-- **High-Frequency Trading** (microsecond execution)
-- **Machine Learning** for adaptive strategies
-- **Portfolio Optimization** (multi-asset allocation)
-- **Options Pricing & Greeks** (derivatives trading)
-- **Extreme-condition risk management** via dependency structure modeling
-- **Factor Analysis** (systematic alpha generation)
-- **AI Agents** (autonomous trading systems)
 
-**Current Status**: Production-ready HFT core with expanding ML/AI capabilities.
+HFT_Trading_System is designed to answer two fundamental questions:
+
+1. **How can we make trading faster?**  
+   → Hardware-efficient C++ execution, lock-free data pipelines, and optimized memory design.
+
+2. **What are the best strategies to trade?**  
+   → Data-driven discovery using reinforcement learning, deep learning, and statistical inference.
 
 ---
 
-## Key Features
 
-###  **High-Performance Core**
-- **C++ Execution Engine**: Sub-microsecond order processing via Pybind11
-- **Lock-Free Data Structures**: Concurrent order book management
-- **Hardware Optimization**: SIMD vectorization, cache-friendly algorithms
+##  Key Features
 
-###  **Multi-Strategy Framework**
-- **Traditional Strategies**: Momentum, Mean Reversion, Statistical Arbitrage
-- **ML-Enhanced Strategies**: LSTM, Transformer-based prediction models
-- **Ensemble Methods**: Multi-model aggregation for robust signals
+###  **Ultra-Low-Latency Core**
+- **C++17 Execution Engine**: Sub-microsecond order processing via Pybind11  
+- **Lock-Free Queues**: Concurrent order book and market data handling  
+- **Hardware Optimization**: SIMD vectorization, cache alignment, NUMA-aware design  
 
-###  **Machine Learning Stack**
-- **Deep Learning**: PyTorch, TensorFlow for neural network strategies
-- **Gradient Boosting**: XGBoost, LightGBM for feature-based models
-- **JAX Integration**: Hardware-accelerated numerical computing
+###  **Strategy Research Layer**
+- **Classical Strategies**: Momentum, Mean Reversion, Statistical Arbitrage  
+- **ML-Based Models**: LSTM, Transformer, and Gradient Boosting  
+- **RL & Imitation Learning**: PPO, DQN, Soft Behavior Cloning  
+- **Ensemble Framework**: Combine multiple models for regime-robust performance  
 
-###  **Production-Ready Infrastructure**
-- **Backtesting Engine**: Vectorized historical simulation
-- **Risk Management**: Real-time position limits and drawdown controls
-- **Performance Analytics**: Sharpe ratio, max drawdown, factor attribution
+###  **Evaluation & Risk Control**
+- **Real-Time Analytics**: Sharpe, Sortino, and drawdown tracking  
+- **Backtesting Engine**: Vectorized tick-level simulation  
+- **Risk Constraints**: Position sizing, stop-loss, CVaR bounds  
 
 ---
 
-##  Architecture
+##  Architecture Overview
 
 ```
-QuantSystem/
+HFT_Trading_System/
 │
-├── cpp_core/              # C++ ultra-low-latency execution
-│   ├── order.cpp          # Order management
-│   ├── data_feed.cpp      # Market data processing
+├── cpp_core/              # Ultra-low-latency execution engine (C++)
+│   ├── order.cpp
+│   ├── data_feed.cpp
 │   └── pybind_bindings.cpp
 │
 ├── strategy/              # Trading strategies
 │   ├── momentum_strategy.py
-│   ├── ml_strategy.py     # ML-based strategies
+│   ├── ml_strategy.py
 │   └── ensemble_strategy.py
 │
-├── execution_engine/      # Order execution logic
-├── risk_control/          # Risk management
-├── evaluation/            # Performance metrics
+├── execution_engine/      # Order routing and market interface
+├── risk_control/          # Real-time risk checks
+├── evaluation/            # Backtests and performance metrics
 │
-├── benchmarks/            # Performance testing
-├── examples/              # Usage examples
-└── scripts/               # Comparison & analysis tools
+├── benchmarks/            # Latency and throughput testing
+├── examples/              # Usage demos
+└── scripts/               # Comparative and diagnostic scripts
 ```
 
 ---
 
-##  Quick Start (5 Minutes)
+## ⚙️ Quick Start
 
-### Prerequisites
-- Python 3.10+
-- C++ compiler (clang/gcc)
-- Git
-
-### Installation
-
+### 1️⃣ Setup Environment
 ```bash
-# 1. Clone repository
-git clone https://github.com/kevinlmf/QuantSystem.git
-cd QuantSystem
-
-# 2. Create virtual environment
+git clone https://github.com/kevinlmf/HFT_Trading_System
+cd HFT_Trading_System
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 3. Install dependencies
+source venv/bin/activate
 pip install -r requirements.txt
+```
 
-# 4. Build C++ module
-./build_cpp.sh  # Windows: python cpp_core/setup.py build_ext --inplace
+### 2️⃣ Build C++ Core
+```bash
+./build_cpp.sh  # Linux/macOS
+# or
+python cpp_core/setup.py build_ext --inplace  # Windows
+```
 
-# 5. Verify installation
+### 3️⃣ Verify Installation
+```bash
 python test_build.py
-```
-
-Expected output:
-```
-✓ All tests passed!
+# ✓ All tests passed!
 ```
 
 ---
 
-##  Usage Examples
+## 🧪 Run Examples
 
-### Run Strategy Comparison
 ```bash
-# Compare traditional strategies
+# Compare basic strategies
 python scripts/strategy_comparison.py
 
-# Compare ML strategies
+# Evaluate ML-based strategies
 python scripts/ml_strategy_comparison.py
 
-# Comprehensive evaluation
+# Full benchmark suite
 python scripts/evaluate_strategies.py
 ```
 
-### Use in Your Code
-
-```python
-import sys
-sys.path.insert(0, 'cpp_core')
-import cpp_trading2
-
-# Ultra-fast C++ execution
-order = cpp_trading2.Order()
-order.symbol = "AAPL"
-order.quantity = 100
-order.price = 150.0
-
-feed = cpp_trading2.DataFeed()
-feed.add_tick("AAPL", 150.5, 1000)
-
-# Python strategies
-from strategy.momentum_strategy import MomentumStrategy
-from strategy.ml_strategy import MLStrategy
-
-strategy = MomentumStrategy(lookback=20)
-signal = strategy.generate_signal(market_data)
-
-ml_strategy = MLStrategy(model_type='lstm')
-ml_strategy.train(historical_data)
-prediction = ml_strategy.predict(current_data)
-```
-
 ---
 
-## Performance Benchmarks
+##  Performance Highlights
 
 | Metric | Value |
 |--------|-------|
 | **Order Processing** | < 1 μs (C++ core) |
-| **Backtesting Speed** | 1M ticks/sec |
-| **Strategy Latency** | 10-50 μs (Python) |
-| **Memory Footprint** | < 100 MB (typical) |
+| **Backtesting Speed** | ~1M ticks/sec |
+| **Python Strategy Latency** | 10–50 μs |
+| **Memory Footprint** | < 100 MB typical |
 
 ---
 
-##  Roadmap & Future Development
-
-### Phase 1: HFT Foundation (✅ Complete)
-- [x] C++ execution engine
-- [x] Basic strategies (momentum, mean reversion)
-- [x] Backtesting framework
-- [x] ML integration (PyTorch, TensorFlow, JAX)
----
-
-## Contributing
-
-Contributions are welcome! This is an evolving research project. Areas of interest:
-
-- **Strategy Development**: New alpha signals and models
-- **Performance Optimization**: C++ engine improvements
-- **ML/AI Research**: Novel deep learning architectures
-- **Documentation**: Examples and tutorials
-- **Testing**: Edge cases and platform compatibility
-
-Please open issues for bugs or feature requests.
-
----
 
 ##  Documentation
 
-- **[Quick Start Guide](QUICK_START.md)**: Get running in 5 minutes
-- **[Build Guide](BUILD_GUIDE.md)**: Detailed compilation instructions
-- **Examples**: See `examples/` directory
-- **Benchmarks**: See `benchmarks/` for performance tests
+- **[Quick Start Guide](QUICK_START.md)**
+- **[Build Guide](BUILD_GUIDE.md)**
+- **Examples & Benchmarks** in `/examples/` and `/benchmarks/`
 
 ---
 
-##  Current Limitations & Known Issues
+##  Disclaimer
 
-This is an active research project with some rough edges:
-
-- **Cross-Platform Builds**: C++ compilation can be tricky on Windows
-- **Dependency Conflicts**: ML libraries (PyTorch, TensorFlow, JAX) may clash
-- **Performance Tuning**: Hardware-specific optimization needed
-- **Limited Documentation**: More examples and tutorials coming
-- **Test Coverage**: Expanding test suite continuously
-
-**Status**: Core functionality stable, advanced features under development.
+**FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY**  
+This software is **not intended for live trading** without extensive testing.  
+Trading in financial markets involves substantial risk.
 
 ---
 
+##  Acknowledgments
 
-##  License
-
-MIT License © 2025 Mengfan Long
-
-See [LICENSE](LICENSE) file for details.
-
----
-
-## Disclaimer
-
-**FOR EDUCATIONAL AND RESEARCH PURPOSES ONLY**
-
-This software is provided for educational and research purposes. It is not intended to be used for live trading without extensive testing and risk management. Trading carries significant financial risk.
-
----
-
-
-## 🌟 Acknowledgments
-
-Built with:
-- [Pybind11](https://github.com/pybind/pybind11) - C++/Python bindings
-- [PyTorch](https://pytorch.org/) - Deep learning
-- [JAX](https://github.com/google/jax) - High-performance numerical computing
-- [NumPy](https://numpy.org/) & [Pandas](https://pandas.pydata.org/) - Data processing
+Built using:
+- [Pybind11](https://github.com/pybind/pybind11)
+- [PyTorch](https://pytorch.org/)
+- [JAX](https://github.com/google/jax)
+- [NumPy](https://numpy.org/)
+- [Pandas](https://pandas.pydata.org/)
 
 ---
 
 <div align="center">
-
-
-
-*Code a lot, Worry less* 😄
+*Code a lot, Worry less.* 😄  
 
 </div>
+
