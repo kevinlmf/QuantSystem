@@ -159,7 +159,7 @@ Built using:
 ---
 
 <div align="center">
-Code a lot, worry less — every microsecond counts😊
+Worry less — every microsecond counts😊
 
 </div>
 
